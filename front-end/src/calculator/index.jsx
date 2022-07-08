@@ -5,6 +5,10 @@ import { useState } from 'react';
 
 export function Calculator () {
     const [som, setSom] = useState(0)
+    const [ operator, setOperator] = useState()
+    const [firstSom, setFirstSom] = useState(0)
+
+
     function InputNum(e) {
         const input = e.target.value 
         if(som === 0) {
@@ -18,6 +22,14 @@ export function Calculator () {
     }
     function clearCalc () {
         setSom(0)
+    }
+
+    function ChangePosandNeg () {
+        if(som >0) {
+            setSom(-som)
+        } else {
+            setSom(Math.abs(som))
+        }
     }
     return (
         <>
@@ -41,7 +53,8 @@ export function Calculator () {
             <button onClick={InputNum} value={0}>0</button>
             <button>/</button>
             <button>-</button>
-            <button onClick={porcent}>%</button>
+            <BgButtonIconsStyled sx={{background: '#ffeb3b',}} onClick={porcent}>%</BgButtonIconsStyled>
+            <BgButtonIconsStyled onClick={ChangePosandNeg}>+/-</BgButtonIconsStyled>
             <button>=</button>
         </DivStyled>
         </Container>
@@ -58,4 +71,9 @@ const DivStyled = styled.div`
 `
 const H1Styled = styled.h1`
 color: white;
+`
+
+const BgButtonIconsStyled = styled.button`
+    background-color: red;
+    border-radius: 150px;
 `
